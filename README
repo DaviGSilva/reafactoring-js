@@ -1,0 +1,26 @@
+## Sobre o repositório
+Projeto para aplicar conceitos de refatoração utilizando Javascript com typescript e Jest para testes.
+
+## Referência
+Curso Clean Code e Clean Arch do branas.io
+
+## Principais comandos
+Transpilar e rodar o código main.ts
+```
+npx ts-node src/main.ts
+```
+
+### Rodar testes
+```
+npx jest
+```
+
+Flag para gerar dashboard de cobertura dos testes
+```
+npx jest --coverage
+```
+
+Flag para listener das mudanças nos arquivos
+```
+npx jest --watchAll
+```
