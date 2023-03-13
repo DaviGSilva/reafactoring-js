@@ -41,9 +41,5 @@ export function calculateRides(segments) {
 			continue;
 		}
 	}
-	if (fare < 10) {
-		return 10;
-	} else {
-		return fare;
-	}
+	return (fare < 10) ? 10 : fare;
 }
