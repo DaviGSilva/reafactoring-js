@@ -1,5 +1,12 @@
 // @ts-nocheck
 
+const NORMAL_FARE = 2.1;
+const OVERNIGHT_FARE = 3.9;
+const SUNDAY_FARE = 2.9;
+const OVERNIGHT_SUNDAY_FARE = 5;
+const FIRST_DAY_FARE = 1.5;
+const MIN_FARE = 10;
+
 function isOvernight(date) {
 	return date.getHours() >= 22 || date.getHours() <= 6;
 }
@@ -21,25 +28,25 @@ export function calculateRides(segments) {
 		if (!isValidDate(segment.date))
 			return -2;
 		if (segment.date.getDate() === 1) {
-			fare += segment.distance * 1.5;
+			fare += segment.distance * FIRST_DAY_FARE;
 			continue;
 		}
 		if (isOvernight(segment.date) && !isSunday(segment.date)) {
-			fare += segment.distance * 3.90;
+			fare += segment.distance * OVERNIGHT_FARE;
 			continue;
 		}
 		if (isOvernight(segment.date) && isSunday(segment.date)) {
-			fare += segment.distance * 5;
+			fare += segment.distance * OVERNIGHT_SUNDAY_FARE;
 			continue;
 		}
 		if (!isOvernight(segment.date) && isSunday(segment.date)) {
-			fare += segment.distance * 2.9;
+			fare += segment.distance * SUNDAY_FARE;
 			continue;
 		}
 		if (!isOvernight(segment.date) && !isSunday(segment.date)) {
-			fare += segment.distance * 2.10;
+			fare += segment.distance * NORMAL_FARE;
 			continue;
 		}
 	}
-	return (fare < 10) ? 10 : fare;
+	return (fare < MIN_FARE) ? MIN_FARE : fare;
 }
