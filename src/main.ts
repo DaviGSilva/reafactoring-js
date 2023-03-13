@@ -24,18 +24,21 @@ export function calculateRides(segments) {
 			fare += segment.distance * 1.5;
 			continue;
 		}
-		if (isOvernight(segment.date)) {
-			if (!isSunday(segment.date)) {
-				fare += segment.distance * 3.90;
-			} else {
-				fare += segment.distance * 5;
-			}
-		} else {
-			if (isSunday(segment.date)) {
-				fare += segment.distance * 2.9;
-			} else {
-				fare += segment.distance * 2.10;
-			}
+		if (isOvernight(segment.date) && !isSunday(segment.date)) {
+			fare += segment.distance * 3.90;
+			continue;
+		}
+		if (isOvernight(segment.date) && isSunday(segment.date)) {
+			fare += segment.distance * 5;
+			continue;
+		}
+		if (!isOvernight(segment.date) && isSunday(segment.date)) {
+			fare += segment.distance * 2.9;
+			continue;
+		}
+		if (!isOvernight(segment.date) && !isSunday(segment.date)) {
+			fare += segment.distance * 2.10;
+			continue;
 		}
 	}
 	if (fare < 10) {
