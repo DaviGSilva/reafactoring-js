@@ -30,9 +30,9 @@ export function calculateRides(segments) {
 	let fare = 0;
 	for (const segment of segments) {
 		if (!isValidDistance(segment.distance))
-			return -1;
+			throw new Error('Invalid distance');
 		if (!isValidDate(segment.date))
-			return -2;
+			throw new Error('Invalid date');
 		if (isSpecialDay(segment.date)) {
 			fare += segment.distance * FIRST_DAY_FARE;
 			continue;

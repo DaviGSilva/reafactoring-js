@@ -13,10 +13,16 @@ test("Deve calcular uma corrida noturna no domingo", function() {
     expect(calculateRides([{ distance: 10, date: new Date("2021-03-07T23:00:00") }])).toBe(50);
 });
 test("Não deve calcular uma corrida com distância inferior a zero", function() {
-    expect(calculateRides([{ distance: -10, date: new Date("2021-03-01T10:00:00") }])).toBe(-1);
+    const segments = [
+        { distance: -10, date: new Date("2021-03-01T10:00:00") }
+    ];
+    expect(() => calculateRides(segments)).toThrow(new Error('Invalid distance'));
 });
 test("Não deve calcular uma corrida com data inválida", function() {
-    expect(calculateRides([{ distance: 10, date: new Date("abcdef") }])).toBe(-2);
+    const segments = [
+        { distance: 10, date: new Date("abcdef") }
+    ];
+    expect(() => calculateRides(segments)).toThrow(new Error('Invalid date'));
 });
 test("Deve calcular uma corrida com valor mínimo", function() {
     expect(calculateRides([{ distance: 3, date: new Date("2021-03-01T10:00:00") }])).toBe(10);
