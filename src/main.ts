@@ -30,11 +30,9 @@ export function calculateRides(segments) {
 					}
 				}
 			} else {
-				// console.log(d);
 				return -2;
 			}
 		} else {
-			// console.log(dist);
 			return -1;
 		}
 	}
