@@ -20,23 +20,23 @@ export default class Ride {
     calculateFare() {
         let fare = 0;
         for(const segment of this.segments) {
-            if (segment.isSpecialDay(segment.date)) {
+            if (segment.isSpecialDay()) {
                 fare += segment.distance * this.FIRST_DAY_FARE;
                 continue;
             }
-            if (segment.isOvernight(segment.date) && !segment.isSunday(segment.date)) {
+            if (segment.isOvernight() && !segment.isSunday()) {
                 fare += segment.distance * this.OVERNIGHT_FARE;
                 continue;
             }
-            if (segment.isOvernight(segment.date) && segment.isSunday(segment.date)) {
+            if (segment.isOvernight() && segment.isSunday()) {
                 fare += segment.distance * this.OVERNIGHT_SUNDAY_FARE;
                 continue;
             }
-            if (!segment.isOvernight(segment.date) && segment.isSunday(segment.date)) {
+            if (!segment.isOvernight() && segment.isSunday()) {
                 fare += segment.distance * this.SUNDAY_FARE;
                 continue;
             }
-            if (!segment.isOvernight(segment.date) && !segment.isSunday(segment.date)) {
+            if (!segment.isOvernight() && !segment.isSunday()) {
                 fare += segment.distance * this.NORMAL_FARE;
                 continue;
             }

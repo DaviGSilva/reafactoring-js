@@ -4,26 +4,24 @@ export default class Segment {
     OVERNIGHT_END = 6;
 
     constructor(readonly distance: number, readonly date: Date) {
-        if (!this.isValidDistance(this.distance))
-            throw new Error('Invalid distance');
-        if (!this.isValidDate(this.date))
-            throw new Error('Invalid date');
+        if (!this.isValidDistance()) throw new Error('Invalid distance');
+        if (!this.isValidDate()) throw new Error('Invalid date');
     }
 
-    isValidDistance(distance: number) {
-        return distance != null && distance != undefined && typeof distance === "number" && distance > 0;
+    isValidDistance() {
+        return this.distance != null && this.distance != undefined && typeof this.distance === "number" && this.distance > 0;
     }
-    isValidDate(date: Date) {
-        return date != null && date != undefined && date instanceof Date && date.toString() !== "Invalid Date";
+    isValidDate() {
+        return this.date != null && this.date != undefined && this.date instanceof Date && this.date.toString() !== "Invalid Date";
     }
 
-    isOvernight(date: Date) {
-        return date.getHours() >= this.OVERNIGHT_START || date.getHours() <= this.OVERNIGHT_END;
+    isOvernight() {
+        return this.date.getHours() >= this.OVERNIGHT_START || this.date.getHours() <= this.OVERNIGHT_END;
     }
-    isSunday(date: Date) {
-        return date.getDay() === 0;
+    isSunday() {
+        return this.date.getDay() === 0;
     }
-    isSpecialDay(date: Date) {
-        return date.getDate() === this.SPECIAL_DAY;
+    isSpecialDay() {
+        return this.date.getDate() === this.SPECIAL_DAY;
     }
 }
